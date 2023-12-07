@@ -1,0 +1,41 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: '3.1'
+networks:
+    default:
+        name: php-network
+
+services:
+    mariadb:
+        container_name: mariadb
+        image: 'mariadb:11.0'
+        working_dir: /app
+        volumes:
+            - '.:/app'
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=sbxdb
+            - MYSQL_USER=sbxdba
+            - MYSQL_PASSWORD=sbx1000
+        ports:
+            - '8306:3306'
+
+    webserver:
+        container_name : webserver
+        image: 'nginx:alpine'
+        working_dir: /app
+        volumes:
+            - '.:/app'
+            - './phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+        ports:
+            - '8080:80'
+
+    php-fpm:
+        container_name: php-fpm
+        build: phpdocker/php-fpm
+        working_dir: /app
+        volumes:
+            - '.:/app'
+            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
+#            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/cli/conf.d/99-overrides.ini'
