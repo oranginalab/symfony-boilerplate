@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 
-namespace App;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -13,8 +12,8 @@ final class GreeterTest extends TestCase
     {
         $greeter = new Greeter();
 
-        $greeting = $greeter->greet('Alice');
+        $greeting = $greeter->greet('VonTrotta');
 
-        $this->assertSame('Hello, Alice!', $greeting);
+        $this->assertSame('Hello, VonTrotta!', $greeting);
     }
 }
