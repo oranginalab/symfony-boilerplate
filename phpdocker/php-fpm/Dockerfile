@@ -1,16 +1,15 @@
-FROM phpdockerio/php:8.2-fpm
+FROM phpdockerio/php:8.3-fpm
 WORKDIR "/app"
 
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
-        php8.2-intl \
-        php8.2-mcrypt \
-        php8.2-mysql \
-        php8.2-oauth \
-        php8.2-redis \
-        php8.2-uuid \
-        php8.2-xdebug \
-        php8.2-yaml \
+        php8.3-intl \
+        php8.3-mysql \
+        php8.3-oauth \
+        php8.3-redis \
+        php8.3-uuid \
+        php8.3-xdebug \
+        php8.3-yaml \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
