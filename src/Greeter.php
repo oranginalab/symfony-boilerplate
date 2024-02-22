@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
 namespace App;
 
-final class Greeter
+class Greeter
 {
-    public function greet(string $name): string
+    public function greet(string $name = 'World'): string
     {
-        return 'Hello, ' . $name . '!';
+        return 'Hello, '. $name. '!';
     }
 }
