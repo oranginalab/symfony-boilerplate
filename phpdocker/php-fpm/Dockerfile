@@ -14,4 +14,4 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Append your alias to the existing .bashrc file
-RUN echo "alias phpunit='/app/vendor/bin/phpunit --color'" >> /root/.bashrc
+RUN echo "alias phpunit='/app/vendor/bin/phpunit'" >> /root/.bashrc
