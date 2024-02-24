@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Tests\Module\Greeter\Application;
 
 use App\Module\Greeter\Application\Greet\GreetRequest;

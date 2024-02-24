@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Module\Greeter\Application\Greet;
 
 use App\Module\Greeter\Domain\GreeterService;
