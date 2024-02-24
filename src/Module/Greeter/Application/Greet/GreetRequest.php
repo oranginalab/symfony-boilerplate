@@ -2,8 +2,9 @@
 
 namespace App\Module\Greeter\Application\Greet;
 
-class GreetRequest
+use App\Module\Shared\Application\Contract\RequestInterface;
+
+class GreetRequest implements RequestInterface
 {
-    /** @var string $name */
-    public $name;
+    public string $name;
 }

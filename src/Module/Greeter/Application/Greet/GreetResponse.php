@@ -2,9 +2,10 @@
 
 namespace App\Module\Greeter\Application\Greet;
 
-class GreetResponse
+use App\Module\Shared\Application\Contract\ResponseInterface;
+
+class GreetResponse implements ResponseInterface
 {
-    /** @var string $name */
-    public $body;
+    public string $body;
 }
 
