@@ -5,7 +5,6 @@ namespace App\Entry_point\Http\Controller;
 use App\Module\Greeter\Application\Greet\GreetRequest;
 use App\Module\Greeter\Application\Greet\GreetUseCase;
 use App\Module\Greeter\Domain\GreeterService;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;

@@ -9,7 +9,7 @@ Steps to setup a new php environment
 
 * Run $> docker-compose up
 
-* Run $> composer update
+* Run $> composer install
 
 * Setup PHPStorm debugging. Change xdebug port to match that on php-overrides.ini (9005)
 
