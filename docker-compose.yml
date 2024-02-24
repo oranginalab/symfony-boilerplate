@@ -4,25 +4,25 @@
 version: '3.1'
 networks:
     default:
-        name: epi
+        name: shb
 
 services:
     mariadb:
-        container_name: epi_db
+        container_name: shb_db
         image: 'mariadb:11.0'
         working_dir: /app
         volumes:
             - '.:/app'
         environment:
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=epidb
-            - MYSQL_USER=epidba
+            - MYSQL_DATABASE=shb
+            - MYSQL_USER=shbdba
             - MYSQL_PASSWORD=dba1000
         ports:
             - '8306:3306'
 
     webserver:
-        container_name : epi_web
+        container_name : shb_web
         image: 'nginx:alpine'
         working_dir: /app
         volumes:
@@ -32,7 +32,7 @@ services:
             - '8080:80'
 
     php-fpm:
-        container_name: epi_php
+        container_name: shb_php
         build: phpdocker/php-fpm
         working_dir: /app
         volumes:
