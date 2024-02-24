@@ -1,7 +1,7 @@
 Steps to setup a new php environment
 ==================================
 
-* Clone php-boilerplate repo at
+* Clone symfony-boilerplate repo at
 
 * Customize container names at docker-compose.yml
 
