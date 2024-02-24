@@ -1,3 +1,25 @@
+Steps to setup a new php environment
+==================================
+
+* Clone php-boilerplate repo at
+
+* Customize container names at docker-compose.yml
+
+* Customize database credentials at docker-compose.yml
+
+* Run $> docker-compose up
+
+* Run $> composer update
+
+* Setup PHPStorm debugging. Change xdebug port to match that on php-overrides.ini (9005)
+
+* Open http://localhost:8080 to see a greeting message
+
+* Enable incoming requests debugging at PHPStorm, set a breakpoint in public/index.php, and reload http://localhost:8080
+  to check debug configuration for php-fpm requests. [DOESN’T WORK]
+
+* Configure PHPStorm Test Framework (PHPUnit) to use remote interpreter using docker-compose based autoconfig.
+
 PHPDocker.io generated environment
 ==================================
 
@@ -28,24 +50,24 @@ containers, then leave them running in the background.
 You can access your application via **`localhost`**. Mailhog and nginx both respond to any hostname, in case you want to
 add your own hostname on your `/etc/hosts`
 
-| Service              |Address outside containers|
-|----------------------|--------------------------|
-| Webserver            |[localhost:51000](http://localhost:51000)|
-| Mailhog web interface |[localhost:51001](http://localhost:51001)|
-| MariaDB              |**host:** `localhost`; **port:** `51003`|
+| Service               | Address outside containers                |
+|-----------------------|-------------------------------------------|
+| Webserver             | [localhost:51000](http://localhost:51000) |
+| Mailhog web interface | [localhost:51001](http://localhost:51001) |
+| MariaDB               | **host:** `localhost`; **port:** `51003`  |
 
 ## Hosts within your environment ##
 
 You'll need to configure your application to use any services you enabled:
 
-| Service         |Hostname|Port number|
-|-----------------|---------|-----------|
-| php-fpm         |php-fpm|9000|
-| MariaDB         |mariadb|3306 (default)|
-| Memcached       |memcached|11211 (default)|
-| Redis           |redis|6379 (default)|
-| ClickHouse      |clickhouse|9000 (HTTP default)|
-|  SMTP (Mailhog) |mailhog|1025 (default)|
+| Service        | Hostname   | Port number         |
+|----------------|------------|---------------------|
+| php-fpm        | php-fpm    | 9000                |
+| MariaDB        | mariadb    | 3306 (default)      |
+| Memcached      | memcached  | 11211 (default)     |
+| Redis          | redis      | 6379 (default)      |
+| ClickHouse     | clickhouse | 9000 (HTTP default) |
+| SMTP (Mailhog) | mailhog    | 1025 (default)      |
 
 # Docker compose cheatsheet #
 
@@ -147,6 +169,7 @@ environment:
 * Finally, add “Xdebug helper” extension in your browser, set breakpoints and start debugging
 
 ### Create a launch.json for visual studio code
+
 ```
   {
       "version": "0.2.0",
