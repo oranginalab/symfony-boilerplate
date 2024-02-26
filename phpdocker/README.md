@@ -19,6 +19,7 @@ Steps to setup a new php environment
   to check debug configuration for php-fpm requests. [DOESN’T WORK]
 
 * Configure PHPStorm Test Framework (PHPUnit) to use remote interpreter using docker-compose based autoconfig.
+  We will set it to use the /app/bin/phpunit binary and set phpunit.xml.dist and bootstrap.php locations.
 
 PHPDocker.io generated environment
 ==================================
