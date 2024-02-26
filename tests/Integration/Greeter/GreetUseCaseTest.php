@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Tests\Module\Greeter\Application;
+namespace App\Tests\Integration\Greeter;
 
 use App\Module\Greeter\Application\Greet\GreetRequest;
 use App\Module\Greeter\Application\Greet\GreetUseCase;
 use App\Module\Greeter\Domain\GreeterService;
-
 use PHPUnit\Framework\TestCase;
 
 
