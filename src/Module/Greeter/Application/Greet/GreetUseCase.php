@@ -9,17 +9,17 @@ use App\Module\Shared\Application\Contract\UseCaseInterface;
 
 class GreetUseCase implements UseCaseInterface
 {
-    private GreeterService $greeter;
+    private GreeterService $greeterService;
 
     public function __construct(GreeterService $greeter)
     {
-        $this->greeter = $greeter;
+        $this->greeterService = $greeter;
     }
 
     public function run(RequestInterface $request): ResponseInterface
     {
         $response = new GreetResponse();
-        $response->body = $this->greeter->greet($request->name);
+        $response->body = $this->greeterService->greet($request->name);
 
         return $response;
     }
