@@ -28,7 +28,7 @@ class GreetUseCase implements UseCaseInterface
         $greeting = $this->greetingService->create($request->name);
 
         $response = new GreetResponse();
-        $response->body = $this->greeterService->greet($greeting->getName());
+        $response->body = $this->greeterService->greet($request->name);
 
         return $response;
     }
