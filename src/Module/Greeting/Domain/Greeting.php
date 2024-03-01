@@ -2,22 +2,25 @@
 
 namespace App\Module\Greeting\Domain;
 
+use App\Module\Shared\Domain\UuidGeneratorServiceInterface;
+
 class Greeting
 {
 
-    private int $id;
+    private string $id;
 
     private string $message;
 
     private \DateTime $createdAt;
 
-    public function __construct(string $message)
+    public function __construct(string $id, string $message)
     {
+        $this->id = $id;
         $this->message = $message;
         $this->createdAt = new \DateTime();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

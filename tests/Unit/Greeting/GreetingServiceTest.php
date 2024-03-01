@@ -5,6 +5,8 @@ namespace App\Tests\Unit\Greeting;
 use App\Module\Greeting\Infrastructure\Persistence\Doctrine\GreetingDoctrineRepository;
 use App\Module\Greeting\Infrastructure\Persistence\GreetingService;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Uid\Factory\UuidFactory;
+use Symfony\Component\Uid\Uuid;
 
 class GreetingServiceTest extends TestCase
 {
@@ -15,7 +17,10 @@ class GreetingServiceTest extends TestCase
         $repositoryMock = $this->createMock(GreetingDoctrineRepository::class);
         $repositoryMock->expects($this->once())->method('save');
 
-        $service = new GreetingService($repositoryMock);
+        $uuidFactoryMock = $this->createMock(UuidFactory::class);
+        $uuidFactoryMock->expects($this->once())->method('create')->willReturn(Uuid::v4());
+
+        $service = new GreetingService($repositoryMock, $uuidFactoryMock);
         $service->create($message);
     }
 
@@ -24,7 +29,11 @@ class GreetingServiceTest extends TestCase
         $repositoryMock = $this->createMock(GreetingDoctrineRepository::class);
         $repositoryMock->expects($this->once())->method('save');
 
-        $service = new GreetingService($repositoryMock);
+        $uuidFactoryMock = $this->createMock(UuidFactory::class);
+        $uuidFactoryMock->expects($this->once())->method('create')->willReturn(Uuid::v4());
+
+        $service = new GreetingService($repositoryMock, $uuidFactoryMock);
         $service->create();
     }
+
 }
