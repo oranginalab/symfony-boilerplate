@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Unit\Greeter;
+namespace App\Tests\Unit\Greeting;
 
-use App\Module\Greeter\Domain\GreeterService;
+use App\Module\Greeting\Domain\GreeterService;
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Application\Greeter;
+namespace App\Tests\Application\Greeting;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\HttpClient;

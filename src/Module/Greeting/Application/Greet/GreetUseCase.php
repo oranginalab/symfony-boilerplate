@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Greeter\Application\Greet;
+namespace App\Module\Greeting\Application\Greet;
 
-use App\Module\Greeter\Domain\GreeterService;
+use App\Module\Greeting\Domain\GreeterService;
 use App\Module\Shared\Application\Contract\RequestInterface;
 use App\Module\Shared\Application\Contract\ResponseInterface;
 use App\Module\Shared\Application\Contract\UseCaseInterface;

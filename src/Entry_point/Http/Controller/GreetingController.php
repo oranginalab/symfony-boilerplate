@@ -2,15 +2,14 @@
 
 namespace App\Entry_point\Http\Controller;
 
-use App\Module\Greeter\Application\Greet\GreetRequest;
-use App\Module\Greeter\Application\Greet\GreetUseCase;
-use App\Module\Greeter\Domain\GreeterService;
+use App\Module\Greeting\Application\Greet\GreetUseCase;
+use App\Module\Greeting\Application\Greet\GreetRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-class GreeterController extends AbstractController
+class GreetingController extends AbstractController
 {
 
     #[Route('/', name: 'home')]
@@ -24,7 +23,7 @@ class GreeterController extends AbstractController
 
         return $this->json([
             'message' => $response->body,
-            'path' => 'src/Controller/GreeterController.php',
+            'path' => 'src/Controller/GreetingController.php',
         ]);
     }
 }
