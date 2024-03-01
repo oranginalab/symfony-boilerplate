@@ -24,12 +24,12 @@ class GreetUseCase implements UseCaseInterface
 
     public function run(RequestInterface $request): ResponseInterface
     {
-        // Create and persist a greeting object
-        $greeting = $this->greetingService->create($request->name);
-
         $response = new GreetResponse();
         $response->body = $this->greeterService->greet($request->name);
 
+        // Create and persist a greeting object
+        $this->greetingService->create($response->body);
+        
         return $response;
     }
 }
