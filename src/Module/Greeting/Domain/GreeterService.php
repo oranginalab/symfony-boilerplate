@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Greeter\Domain;
+namespace App\Module\Greeting\Domain;
 
 class GreeterService
 {
