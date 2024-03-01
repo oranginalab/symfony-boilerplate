@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Greeting;
 
 use App\Module\Greeting\Domain\Greeting;
 
+use App\Module\Greeting\Domain\Mood;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Factory\UuidFactory;
@@ -43,6 +44,15 @@ class GreetingTest extends TestCase
         $this->assertNotEmpty($greeting->getId());
         $this->assertIsString($greeting->getId());
         $this->assertEquals(36, strlen($greeting->getId()));
+    }
+
+    public function test_we_can_set_a_greeting_mood(): void
+    {
+        $mood = new Mood((new UuidFactory())->create()->toRfc4122(), 'Gentle');
+        $greeting = new Greeting($this->id, $this->message);
+        $greeting->setMood($mood);
+
+        $this->assertEquals('Gentle', $greeting->getMood()->getLabel());
     }
 
     public function tearDown(): void

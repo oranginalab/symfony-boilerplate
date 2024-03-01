@@ -11,12 +11,15 @@ class Greeting
 
     private string $message;
 
+    private ?Mood $mood;
+
     private \DateTime $createdAt;
 
-    public function __construct(string $id, string $message)
+    public function __construct(string $id, string $message, Mood $mood = null)
     {
         $this->id = $id;
         $this->message = $message;
+        $this->mood = $mood;
         $this->createdAt = new \DateTime();
     }
 
@@ -40,6 +43,18 @@ class Greeting
     public function setMessage(string $message): static
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getMood(): ?Mood
+    {
+        return $this->mood;
+    }
+
+    public function setMood(Mood $mood): static
+    {
+        $this->mood = $mood;
 
         return $this;
     }
