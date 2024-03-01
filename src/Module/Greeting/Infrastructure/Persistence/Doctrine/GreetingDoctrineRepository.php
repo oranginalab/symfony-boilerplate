@@ -21,10 +21,10 @@ class GreetingDoctrineRepository extends ServiceEntityRepository
         parent::__construct($registry, Greeting::class);
     }
 
-    public function save(Greeting $greeting)
+    public function save(Greeting $greeting): void
     {
-        $this->_em->persist($greeting);
-        $this->_em->flush();
+        $this->getEntityManager()->persist($greeting);
+        $this->getEntityManager()->flush();
     }
 
     //    /**
