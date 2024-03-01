@@ -6,41 +6,50 @@ use App\Module\Greeting\Domain\Greeting;
 
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Uid\Factory\UuidFactory;
 
 class GreetingTest extends TestCase
 {
-    public function test_we_can_create_a_greeting(): void
+    private string $id;
+    private string $message;
+
+    public function setUp(): void
     {
-        $greeting = new Greeting('Hi,W!');
-        $this->assertInstanceOf(Greeting::class, $greeting);
+        parent::setUp();
+
+        $this->id = (new UuidFactory())->create()->toRfc4122();
+        $this->message = 'Hi, W!';
     }
 
-    public function test_we_can_set_id(): void
+    public function test_we_can_create_a_greeting(): void
     {
-        $greeting = new Greeting('Hi,W!');
-        $greeting->setId(1);
-
-        $this->assertEquals(1, $greeting->getId());
+        $greeting = new Greeting($this->id, $this->message);
+        $this->assertInstanceOf(Greeting::class, $greeting);
     }
 
     public function test_createdAt_is_set_at_creation_time(): void
     {
-        $greeting = new Greeting('Hi,W!');
+        $greeting = new Greeting($this->id, $this->message);
 
         $this->assertNotEmpty($greeting->getCreatedAt());
         $this->assertInstanceof(DateTime::class, $greeting->getCreatedAt());
     }
 
-    public function test_greeting_id_is_a_uuid(): void
+    public function test_greeting_id_is_a_valid_uuid(): void
     {
-        $this->markTestSkipped();
-        /*
-        $greeting = new Greeting('Hi, W!');
+        $greeting = new Greeting($this->id, $this->message);
+
 
         $this->assertNotEmpty($greeting->getId());
-        $this->assertInstanceOf(Uuid::class, $greeting->getId());
-        */
+        $this->assertIsString($greeting->getId());
+        $this->assertEquals(36, strlen($greeting->getId()));
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        unset($this->id);
+        unset($this->message);
+    }
 
 }
