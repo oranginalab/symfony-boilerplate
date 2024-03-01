@@ -4,5 +4,5 @@ namespace App\Module\Greeting\Domain;
 
 interface GreetingPersistenceServiceInterface
 {
-    public function create(?string $message): void;
+    public function create(?string $message): Greeting;
 }

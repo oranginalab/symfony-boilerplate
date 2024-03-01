@@ -16,10 +16,12 @@ class GreetingService implements GreetingPersistenceServiceInterface
         $this->repository = $repository;
     }
 
-    public function create(?string $message = 'Hello, VonTrotta!'): void
+    public function create(?string $message = 'Hello, VonTrotta!'): Greeting
     {
         $greeting = new Greeting($message);
         $this->repository->save($greeting);
+
+        return $greeting;
     }
 
 }
