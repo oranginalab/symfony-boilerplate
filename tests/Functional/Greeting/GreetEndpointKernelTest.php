@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Application\Greeting;
+namespace App\Tests\Functional\Greeting;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
