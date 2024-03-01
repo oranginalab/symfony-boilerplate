@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Application\Greeter;
+namespace App\Tests\Application\Greeting;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class GreetEnpointKernelTest extends WebTestCase
+class GreetEndpointKernelTest extends WebTestCase
 {
     public function test_we_can_greet_anyone(): void
     {
