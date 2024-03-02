@@ -24,7 +24,7 @@ class GreetUseCaseTest extends KernelTestCase
         //Domain Greet service has done its job
         $this->assertEquals("Hello, vonTrotta!", $response->body);
 
-        //Infrastructre Greeting service has created a new greeting record in database
+        //Infrastructure Greeting service has created a new greeting record in database
         $numGreetings = $container->get(GreetingDoctrineRepository::class)->count([]);
         $this->assertEquals(1, $numGreetings);
 
