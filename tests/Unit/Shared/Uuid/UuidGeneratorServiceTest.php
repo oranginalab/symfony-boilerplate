@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Tests\Unit\Uuid;
+namespace App\Tests\Unit\Shared\Uuid;
 
 use App\Module\Shared\Infrastructure\UuidGeneratorService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Factory\UuidFactory;
-use Symfony\Component\Uid\Uuid;
 
 
 class UuidGeneratorServiceTest extends TestCase
