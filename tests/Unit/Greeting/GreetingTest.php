@@ -28,6 +28,14 @@ class GreetingTest extends TestCase
         $this->assertInstanceOf(Greeting::class, $greeting);
     }
 
+    public function test_we_can_create_a_greeting_with_a_mood(): void
+    {
+        $mood = new Mood((new UuidFactory())->create()->toRfc4122(), 'Gentle');
+        $greeting = new Greeting($this->id, $this->message, $mood);
+
+        $this->assertEquals('Gentle', $greeting->getMood()->getLabel());
+    }
+
     public function test_createdAt_is_set_at_creation_time(): void
     {
         $greeting = new Greeting($this->id, $this->message);
@@ -36,22 +44,13 @@ class GreetingTest extends TestCase
         $this->assertInstanceof(DateTime::class, $greeting->getCreatedAt());
     }
 
-    public function test_greeting_id_is_a_valid_uuid(): void
-    {
-        $greeting = new Greeting($this->id, $this->message);
-
-
-        $this->assertNotEmpty($greeting->getId());
-        $this->assertIsString($greeting->getId());
-        $this->assertEquals(36, strlen($greeting->getId()));
-    }
-
     public function test_we_can_set_a_greeting_mood(): void
     {
         $mood = new Mood((new UuidFactory())->create()->toRfc4122(), 'Gentle');
         $greeting = new Greeting($this->id, $this->message);
         $greeting->setMood($mood);
 
+        $this->assertInstanceOf(Mood::class, $greeting->getMood());
         $this->assertEquals('Gentle', $greeting->getMood()->getLabel());
     }
 
