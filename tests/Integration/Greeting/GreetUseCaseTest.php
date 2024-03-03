@@ -5,6 +5,7 @@ namespace App\Tests\Integration\Greeting;
 use App\Module\Greeting\Application\Greet\GreetRequest;
 use App\Module\Greeting\Application\Greet\GreetUseCase;
 use App\Module\Greeting\Infrastructure\Persistence\Doctrine\GreetingDoctrineRepository;
+use App\Module\Greeting\Infrastructure\Persistence\Doctrine\MoodDoctrineRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 
@@ -17,6 +18,7 @@ class GreetUseCaseTest extends KernelTestCase
 
         $request = new GreetRequest();
         $request->name = "vonTrotta";
+        $request->mood = "Nice";
 
         $useCase = $container->get(GreetUseCase::class);
         $response = $useCase->run($request);
@@ -32,5 +34,9 @@ class GreetUseCaseTest extends KernelTestCase
         $greetings = $container->get(GreetingDoctrineRepository::class)->findAll();
         $greeting = array_shift($greetings);
         $this->assertEquals($response->body, $greeting->getMessage());
+
+        //Mood has been also persisted
+        $numMoods = $container->get(MoodDoctrineRepository::class)->count([]);
+        $this->assertEquals(1, $numMoods);
     }
 }

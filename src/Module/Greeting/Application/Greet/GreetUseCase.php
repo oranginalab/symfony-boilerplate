@@ -4,6 +4,7 @@ namespace App\Module\Greeting\Application\Greet;
 
 use App\Module\Greeting\Domain\GreeterService;
 use App\Module\Greeting\Domain\GreetingPersistenceServiceInterface;
+use App\Module\Greeting\Domain\Mood;
 use App\Module\Shared\Application\Contract\RequestInterface;
 use App\Module\Shared\Application\Contract\ResponseInterface;
 use App\Module\Shared\Application\Contract\UseCaseInterface;
@@ -28,8 +29,8 @@ class GreetUseCase implements UseCaseInterface
         $response->body = $this->greeterService->greet($request->name);
 
         // Create and persist a greeting object
-        $this->greetingService->create($response->body);
-        
+        $this->greetingService->create($response->body, $request->mood);
+
         return $response;
     }
 }

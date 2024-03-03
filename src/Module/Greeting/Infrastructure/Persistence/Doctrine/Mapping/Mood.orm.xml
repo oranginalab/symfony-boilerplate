@@ -9,8 +9,7 @@
         <id name="id" type="guid" column="id">
             <generator strategy="NONE"/>
         </id>
-        <field name="name" column="name" length="255"/>
-        <field name="createdAt" type="datetime" column="created"/>
+        <field name="label" column="label" length="255"/>
     </entity>
 
 </doctrine-mapping>

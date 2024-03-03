@@ -11,6 +11,13 @@
         </id>
         <field name="message" column="message" length="255"/>
         <field name="createdAt" type="datetime" column="created"/>
+
+        <many-to-one
+                field="mood"
+                target-entity="App\Module\Greeting\Domain\Mood"
+                inversed-by="greetings">
+        </many-to-one>
+
         <indexes>
             <index columns="message"/>
         </indexes>
