@@ -38,5 +38,10 @@ class GreetUseCaseTest extends KernelTestCase
         //Mood has been also persisted
         $numMoods = $container->get(MoodDoctrineRepository::class)->count([]);
         $this->assertEquals(1, $numMoods);
+
+        //Persisted mood label is the one defined in the request
+        $moods = $container->get(MoodDoctrineRepository::class)->findAll();
+        $mood = array_shift($moods);
+        $this->assertEquals($request->mood, $mood->getLabel());
     }
 }
