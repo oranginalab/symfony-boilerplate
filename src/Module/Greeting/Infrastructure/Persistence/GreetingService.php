@@ -7,34 +7,33 @@ use App\Module\Greeting\Domain\Greeting;
 use App\Module\Greeting\Domain\GreetingPersistenceServiceInterface;
 use App\Module\Greeting\Domain\Mood;
 use App\Module\Greeting\Infrastructure\Persistence\Doctrine\GreetingDoctrineRepository;
-use App\Module\Greeting\Infrastructure\Persistence\Doctrine\MoodDoctrineRepository;
 use Symfony\Component\Uid\Factory\UuidFactory;
 
 class GreetingService implements GreetingPersistenceServiceInterface
 {
     private GreetingDoctrineRepository $repository;
     private UuidFactory $uuidFactory;
-    private MoodDoctrineRepository $moodRepository;
+    private MoodService $moodService;
 
     public function __construct(
         GreetingDoctrineRepository $repository,
         UuidFactory $uuidFactory,
-        MoodDoctrineRepository $moodRepository
+        MoodService $moodService
     ) {
         $this->repository = $repository;
         $this->uuidFactory = $uuidFactory;
-        $this->moodRepository = $moodRepository;
+        $this->moodService = $moodService;
     }
 
     public function create(string $message = 'Hello, vonTrotta!', string|null $mood = null): Greeting
     {
         // TODO: Deal with already existing moods.
+        $moodObj = null;
         if (!is_null($mood)) {
-            $mood = new Mood($this->uuidFactory->create(), $mood);
-            $this->moodRepository->save($mood);
+            $moodObj = $this->moodService->create($mood);
         }
 
-        $greeting = new Greeting($this->uuidFactory->create(), $message, $mood);
+        $greeting = new Greeting($this->uuidFactory->create(), $message, $moodObj);
         $this->repository->save($greeting);
 
         return $greeting;
