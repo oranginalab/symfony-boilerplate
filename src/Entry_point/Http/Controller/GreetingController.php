@@ -14,7 +14,7 @@ class GreetingController extends AbstractController
 
     #[Route('/', name: 'home')]
     #[Route('/greet/{name}', name: 'app_greeter')]
-    #[Route('/greet/{name}/{mood}', name: 'app_greeter')]
+    #[Route('/greet/{name}/{mood}', name: 'app_greeter_moody')]
     public function index(GreetUseCase $useCase, Request $httpRequest): JsonResponse
     {
         $request = new GreetRequest();
