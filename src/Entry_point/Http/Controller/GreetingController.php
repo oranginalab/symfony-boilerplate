@@ -19,7 +19,7 @@ class GreetingController extends AbstractController
     {
         $request = new GreetRequest();
         $request->name = $httpRequest->get('name', 'VonTrotta');
-        $request->mood = $httpRequest->get('mood', 'Rude');
+        $request->mood = $httpRequest->get('mood');
 
         $response = $useCase->run($request);
 
