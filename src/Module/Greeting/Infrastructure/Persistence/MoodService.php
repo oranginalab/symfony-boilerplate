@@ -18,9 +18,13 @@ class MoodService implements MoodPersistenceServiceInterface
         $this->uuidFactory = $uuidFactory;
     }
 
+    public function findByLabel(string $label): ?Mood
+    {
+        return $this->repository->findOneByLabel($label);
+    }
+
     public function create(string $label): Mood
     {
-        // TODO: Deal with already existing moods.
         $mood = new Mood($this->uuidFactory->create(), $label);
         $this->repository->save($mood);
 

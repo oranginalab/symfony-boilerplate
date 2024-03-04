@@ -27,16 +27,17 @@ class GreetingService implements GreetingPersistenceServiceInterface
 
     public function create(string $message = 'Hello, vonTrotta!', string|null $mood = null): Greeting
     {
-        // TODO: Deal with already existing moods.
-        $moodObj = null;
-        if (!is_null($mood)) {
-            $moodObj = $this->moodService->create($mood);
-        }
+        $moodObject = (null === $mood) ? null : $this->getMoodObject($mood);
 
-        $greeting = new Greeting($this->uuidFactory->create(), $message, $moodObj);
+        $greeting = new Greeting($this->uuidFactory->create(), $message, $moodObject);
         $this->repository->save($greeting);
 
         return $greeting;
+    }
+
+    private function getMoodObject(string $moodLabel): Mood
+    {
+        return $this->moodService->findByLabel($moodLabel) ?: $this->moodService->create($moodLabel);
     }
 
 }

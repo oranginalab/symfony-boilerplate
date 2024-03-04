@@ -21,10 +21,21 @@ class MoodDoctrineRepository extends ServiceEntityRepository
         parent::__construct($registry, Mood::class);
     }
 
+
     public function save(Mood $mood): void
     {
         $this->getEntityManager()->persist($mood);
         $this->getEntityManager()->flush();
+    }
+
+
+    public function findOneByLabel($label): ?Mood
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.label = :val')
+            ->setParameter('val', $label)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     //    /**
