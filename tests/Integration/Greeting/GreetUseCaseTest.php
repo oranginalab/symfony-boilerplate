@@ -44,4 +44,35 @@ class GreetUseCaseTest extends KernelTestCase
         $mood = array_shift($moods);
         $this->assertEquals($request->mood, $mood->getLabel());
     }
+
+    public function test_we_can_greet_someone_without_mood(): void
+    {
+        self::bootKernel();
+        $container = static::getContainer();
+
+        $request = new GreetRequest();
+        $request->name = "vonTrotta";
+        
+        $useCase = $container->get(GreetUseCase::class);
+        $response = $useCase->run($request);
+
+        //Domain Greet service has done its job
+        $this->assertEquals("Hello, vonTrotta!", $response->body);
+
+        //Infrastructure Greeting service has created a new greeting record in database
+        $numGreetings = $container->get(GreetingDoctrineRepository::class)->count([]);
+        $this->assertEquals(1, $numGreetings);
+
+        //Greeting message should be the equal to Response body
+        $greetings = $container->get(GreetingDoctrineRepository::class)->findAll();
+        $greeting = array_shift($greetings);
+        $this->assertEquals($response->body, $greeting->getMessage());
+
+        // Greeting mood shold be null
+        $this->assertNull($greeting->getMood());
+
+        //No mood has been persisted
+        $numMoods = $container->get(MoodDoctrineRepository::class)->count([]);
+        $this->assertEquals(0, $numMoods);
+    }
 }

@@ -29,7 +29,7 @@ class GreetingServiceTest extends TestCase
 
     public function test_we_can_create_a_greeting(): void
     {
-        $message = 'Hello, VonTrotta!';
+        $message = 'Hello, World!';
 
         // Main entity repository dependency
         $this->repositoryMock->expects($this->once())->method('save');
@@ -41,7 +41,9 @@ class GreetingServiceTest extends TestCase
         // Uuid generator service dependency
         $this->uuidFactoryMock->expects($this->once())->method('create')->willReturn(Uuid::v4());
 
-        $this->service->create($message);
+        $greeting = $this->service->create($message);
+        $this->assertEquals($message, $greeting->getMessage());
+        $this->assertNull($greeting->getMood());
     }
 
     public function test_we_can_create_a_greeting_with_a_default_message(): void
@@ -55,7 +57,10 @@ class GreetingServiceTest extends TestCase
 
         $this->uuidFactoryMock->expects($this->once())->method('create')->willReturn(Uuid::v4());
 
-        $this->service->create();
+        $greeting = $this->service->create();
+
+        $this->assertEquals('Hello, vonTrotta!', $greeting->getMessage());
+        $this->assertNull($greeting->getMood());
     }
 
     public function test_we_can_create_a_greeting_with_a_mood_object(): void
@@ -65,11 +70,16 @@ class GreetingServiceTest extends TestCase
 
         // Association entity dependency
         $this->moodServiceMock->expects($this->once())->method('findByLabel')->willReturn(null);
-        $this->moodServiceMock->expects($this->once())->method('create');
+        $this->moodServiceMock->expects($this->once())->method('create')->willReturn(
+            new Mood(Uuid::v4(), 'Nice')
+        );
 
         $this->uuidFactoryMock->expects($this->once())->method('create')->willReturn(Uuid::v4());
 
-        $this->service->create('Hello in good mood!', 'Nice');
+        $greeting = $this->service->create('Hello in good mood!', 'Nice');
+
+        $this->assertEquals('Hello in good mood!', $greeting->getMessage());
+        $this->assertEquals('Nice', $greeting->getMood()->getLabel());
     }
 
     public function test_we_can_create_a_greeting_with_an_already_existing_mood_object(): void
@@ -85,7 +95,9 @@ class GreetingServiceTest extends TestCase
 
         $this->uuidFactoryMock->expects($this->once())->method('create')->willReturn(Uuid::v4());
 
-        $this->service->create('Hello in good mood!', 'Existing mood');
+        $greeting = $this->service->create('Hello in good mood!', 'Existing mood');
+        $this->assertEquals('Hello in good mood!', $greeting->getMessage());
+        $this->assertEquals('Existing mood', $greeting->getMood()->getLabel());
     }
 
 }

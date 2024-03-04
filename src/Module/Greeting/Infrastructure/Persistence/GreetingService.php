@@ -25,7 +25,7 @@ class GreetingService implements GreetingPersistenceServiceInterface
         $this->moodService = $moodService;
     }
 
-    public function create(string $message = 'Hello, vonTrotta!', string|null $mood = null): Greeting
+    public function create(string $message = 'Hello, vonTrotta!', ?string $mood = null): Greeting
     {
         $moodObject = (null === $mood) ? null : $this->getMoodObject($mood);
 
